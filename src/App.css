@@ -71,3 +71,55 @@ body {
   padding: 20px 0;
   font-size: 30px;
 }
+
+
+* {
+  box-sizing: border-box;
+}
+
+/* .carousel-container {
+  width: 100%;
+  margin: 50px auto;
+  position: relative;
+  border-left-width: 4px;
+  border-left-style: solid;
+  border-left-color: #aaa;
+  padding: 0 30px;
+} */
+.inner-carousel {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+.track {
+  display: inline-flex;
+  height: 100%;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card-container {
+  height: 400px;
+  width: 500px;
+  padding-inline: 5px;
+}
+
+.nav button {
+  position: absolute;
+  top: 50%;
+  transform: translatey(-50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  outline: none;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+.nav .prev {
+  left: 10px;
+  top: -100px;
+}
+
+.nav .next {
+  right: 10px;
+  top: -100px;
+}

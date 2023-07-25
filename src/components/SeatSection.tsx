@@ -1,14 +1,14 @@
 import { Button } from "antd";
 import { SeatModel } from "../types/bus";
-import { useEffect } from "react";
 
 type Props = {
     seatType?: '2+2' | '2+1',
     seats: Array<SeatModel>;
     handleSeatSelection: any;
+    confirmBooking: any;
 }
 
-const SeatSection = ({ seatType, seats, handleSeatSelection }: Props) => {
+const SeatSection = ({ seatType, seats, handleSeatSelection, confirmBooking }: Props) => {
 
     console.log(seatType, seats);
     const noOfRows = (seatType === '2+1' ? 3 : 4);
@@ -20,7 +20,7 @@ const SeatSection = ({ seatType, seats, handleSeatSelection }: Props) => {
 
         return (<li className={gridClass} key={seat.seatNo}>
             {rowNo} {noOfColumns} {index}
-            <Button disabled={!seat.isAvailable} className="seat" onClick={() => handleSeatSelection(seat)}>{seat.seatNo}</Button>
+            <Button disabled={!seat.isAvailable} className="seat" onClick={() => handleSeatSelection(seat, seat.isAvailable)}>{seat.seatNo}</Button>
         </li>)
     })
 
@@ -34,6 +34,10 @@ const SeatSection = ({ seatType, seats, handleSeatSelection }: Props) => {
             <ul style={customStyle} className={`grid-container-${noOfRows}`}>
                 {seatSet}
             </ul>
+
+            <div>
+                <Button onClick={confirmBooking}>Confirm Booking</Button>
+            </div>
         </>
     )
 }

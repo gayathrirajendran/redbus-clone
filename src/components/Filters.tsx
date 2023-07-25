@@ -17,7 +17,7 @@ const Filters = ({ filterTypes, filterChange }: Props) => {
 
   useEffect(() => {
     const subscription = watch((value, { name, type }) => {
-      filterChange(formVal);
+      filterChange(value);
       console.log(value, name, type)
     });
     return () => subscription.unsubscribe();

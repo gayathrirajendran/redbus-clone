@@ -14,6 +14,7 @@ export interface BusModel {
     startPoint: string;
     destinationPoint: string;
     facilities?: string[];
+    tags: string[];
 }
 
 export interface SeatModel {

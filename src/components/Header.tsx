@@ -7,9 +7,9 @@ import { DownOutlined } from '@ant-design/icons';
 type Props = {}
 
 const navigation = [
-  { name: 'Bus tickets', link: 'bus-tickets' },
-  { name: 'Cab rental', link: '' },
-  { name: 'Train tickets', link: '' }
+  { name: 'Bus tickets', link: '/bus-tickets' },
+  { name: 'Cab rental', link: '/' },
+  { name: 'Train tickets', link: '/' }
 ]
 
 

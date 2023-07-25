@@ -15,7 +15,10 @@ const FilteredBuses = ({ buses }: Props) => {
   )
 
   return (
-    <div>{busItems}</div>
+    <>
+      <div>Buses {buses.length}</div>
+      <div>{busItems}</div>
+    </>
   )
 }
 

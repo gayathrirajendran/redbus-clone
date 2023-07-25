@@ -73,18 +73,37 @@ const seatList: SeatModel[] = [
 const Bus = ({ busData }: Props) => {
 
     const [isSeatVisible, setIsSeatVisible] = useState<boolean>(false);
+    const tempSeats = !!localStorage.getItem(JSON.stringify(busData.id)) ? JSON.parse(localStorage.getItem(JSON.stringify(busData.id))!) : [];
+    const [seats, setSeats] = useState(tempSeats.length ? tempSeats : seatList);
+    const [selectedSeats, setSelectedSeats] = useState<SeatModel[]>([]);
+
+    // useEffect(() => {
+    //     let storedSelectedSeats;
+    //     // to do: get seat details
+    //     return () => {
+    //     }
+    // }, [isSeatVisible]);
 
     useEffect(() => {
+        localStorage.setItem(JSON.stringify(busData.id), JSON.stringify(seats));
+    }, [seats])
 
-        // to do: get seat details
+    function confirmBooking() {
+        setSeats(seats.map((seat: SeatModel) => {
+            let target = selectedSeats.find((item) => item.seatNo === seat.seatNo);
+            return target ? target : seat
+        }));
+        // make booking
+        // confirmBooking(seatData, busData);
+    }
 
-        return () => {
+    const selectSeat = (seatData: SeatModel, isAvailable: boolean) => {
+        // selectSeatInBus(seatData, busData);
+        const newSeat = { ...seatData, isAvailable: !isAvailable };
+        // confirm booking for the user in local storage so that the next user will not be able to. 
 
-        }
-    }, [isSeatVisible])
-
-    const selectSeat = () => {
-
+        setSelectedSeats([...selectedSeats, newSeat])
+        // seats.map((seat) => seat.seatNo === newSeat.seatNo ? newSeat : seat)
     }
 
 
@@ -138,7 +157,7 @@ const Bus = ({ busData }: Props) => {
             </Card>
             {isSeatVisible &&
                 <div>
-                    <SeatSection seatType={busData.seatOffering} seats={seatList} handleSeatSelection={selectSeat}></SeatSection>
+                    <SeatSection seatType={busData.seatOffering} seats={seats} handleSeatSelection={selectSeat} confirmBooking={confirmBooking}></SeatSection>
                 </div>
             }
         </div>

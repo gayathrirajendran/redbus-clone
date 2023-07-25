@@ -5,6 +5,7 @@ import Offers from "../components/Offers";
 import FilteredBuses from "../components/FilteredBuses";
 import { BusModel } from "../types/bus";
 import { useEffect, useState } from "react";
+import Header from "../components/Header";
 
 type Props = {}
 
@@ -24,7 +25,8 @@ const masterBusList: BusModel[] = [
     singleSeatsAvailability: 7,
     startPoint: 'Bengaluru',
     destinationPoint: 'Chennai',
-    facilities: ['Wifi', 'Movie']
+    facilities: ['Wifi', 'Movie'],
+    tags: ['Live Tracking', 'Primo Bus', 'Sleeper', 'AC', 'Single seats'],
   },
   {
     id: "DZe3",
@@ -41,7 +43,8 @@ const masterBusList: BusModel[] = [
     singleSeatsAvailability: 7,
     startPoint: 'Bengaluru',
     destinationPoint: 'Chennai',
-    facilities: ['Wifi', 'Movie']
+    facilities: ['Wifi', 'Movie'],
+    tags: ['Live Tracking', 'Sleeper', 'AC', 'Single seats'],
   },
   {
     id: "DZ2e3",
@@ -58,7 +61,8 @@ const masterBusList: BusModel[] = [
     singleSeatsAvailability: 7,
     startPoint: 'Bengaluru',
     destinationPoint: 'Chennai',
-    facilities: ['Wifi', 'Movie']
+    facilities: ['Wifi', 'Movie'],
+    tags: ['Live Tracking', 'Sleeper', 'AC', 'Single seats', 'Wifi']
   },
   {
     id: "BZ2e3",
@@ -75,7 +79,8 @@ const masterBusList: BusModel[] = [
     singleSeatsAvailability: 7,
     startPoint: 'Bengaluru',
     destinationPoint: 'Chennai',
-    facilities: ['Wifi', 'Movie']
+    facilities: ['Wifi', 'Movie'],
+    tags: ['Live Tracking', 'Sleeper', 'AC', 'Single seats', 'Wifi']
   },
   {
     id: "CZ2e3",
@@ -92,7 +97,8 @@ const masterBusList: BusModel[] = [
     singleSeatsAvailability: 7,
     startPoint: 'Bengaluru',
     destinationPoint: 'Chennai',
-    facilities: ['Wifi', 'Movie']
+    facilities: ['Movie'],
+    tags: ['Live Tracking', 'Sleeper', 'NON AC', 'Single seats', 'Movie']
   },
   {
     id: "GZ2e3",
@@ -104,12 +110,13 @@ const masterBusList: BusModel[] = [
     endTime: "06:30",
     endDate: "29-Jul-2023",
     rating: "4.4",
-    startingPrice: "INR 900",
+    startingPrice: "INR 300",
     totalAvailability: 23,
     singleSeatsAvailability: 7,
     startPoint: 'Bengaluru',
     destinationPoint: 'Chennai',
-    facilities: ['Wifi', 'Movie']
+    facilities: ['Wifi'],
+    tags: ['Live Tracking', 'Sleeper', 'Non AC', 'Single seats', 'Wifi', 'departure: After 6 pm']
   },
   {
     id: "EZ2e3",
@@ -126,7 +133,8 @@ const masterBusList: BusModel[] = [
     singleSeatsAvailability: 7,
     startPoint: 'Bengaluru',
     destinationPoint: 'Chennai',
-    facilities: ['Wifi', 'Movie']
+    facilities: ['Wifi', 'Movie'],
+    tags: ['Live Tracking', 'Sleeper', 'AC', 'Single seats', 'Wifi', 'Movie', 'departure: After 6 pm']
   },
   {
     id: "EZFe3",
@@ -143,7 +151,8 @@ const masterBusList: BusModel[] = [
     singleSeatsAvailability: 7,
     startPoint: 'Bengaluru',
     destinationPoint: 'Chennai',
-    facilities: ['Wifi', 'Movie']
+    facilities: ['Wifi', 'Movie'],
+    tags: ['Live Tracking', 'Sleeper', 'AC', 'Single seats', 'Wifi', 'Movie', 'departure: After 6 pm']
   },
   {
     id: "FZ2e3",
@@ -160,7 +169,8 @@ const masterBusList: BusModel[] = [
     singleSeatsAvailability: 7,
     startPoint: 'Bengaluru',
     destinationPoint: 'Chennai',
-    facilities: ['Wifi', 'Movie']
+    facilities: ['Wifi', 'Movie'],
+    tags: ['Live Tracking', 'Sleeper', 'AC', 'Single seats', 'Movie', 'departure: After 6 pm']
   },
   {
     id: "GG2e3",
@@ -168,7 +178,7 @@ const masterBusList: BusModel[] = [
     busType: "AC Semi Sleeper (2+2)",
     seatOffering: "2+2",
     duration: "06h 45m",
-    startTime: "23:30",
+    startTime: "11:30",
     endTime: "06:30",
     endDate: "29-Jul-2023",
     rating: "4.4",
@@ -177,7 +187,8 @@ const masterBusList: BusModel[] = [
     singleSeatsAvailability: 7,
     startPoint: 'Bengaluru',
     destinationPoint: 'Chennai',
-    facilities: ['Wifi', 'Movie']
+    facilities: ['Wifi'],
+    tags: ['Live Tracking', 'Seater', 'AC', 'Movie', 'Wifi', 'departure: 6am to 12pm']
   },
   {
     id: "GG1e3",
@@ -185,8 +196,8 @@ const masterBusList: BusModel[] = [
     busType: "AC Semi Sleeper (2+2)",
     seatOffering: "2+2",
     duration: "06h 45m",
-    startTime: "23:30",
-    endTime: "06:30",
+    startTime: "11:30",
+    endTime: "18:30",
     endDate: "29-Jul-2023",
     rating: "4.4",
     startingPrice: "INR 900",
@@ -194,7 +205,8 @@ const masterBusList: BusModel[] = [
     singleSeatsAvailability: 7,
     startPoint: 'Bengaluru',
     destinationPoint: 'Chennai',
-    facilities: ['Wifi', 'Movie']
+    facilities: ['Wifi', 'Movie'],
+    tags: ['Live Tracking', 'Seater', 'AC', 'Movie', 'departure: 6am to 12pm']
   }
 ]
 
@@ -215,10 +227,10 @@ const BusTickets = (_props: Props) => {
     generic: [{ label: 'Live Tracking', value: 'Live Tracking' },
     { label: 'Primo Bus', value: 'Primo Bus' }],
     departureTime: [
-      { label: 'Before 6 am', value: 'Before 6 am' },
-      { label: '6am to 12pm', value: '6am to 12pm' },
-      { label: '12pm to 6pm', value: '12pm to 6pm' },
-      { label: 'After 6 pm', value: 'After 6 pm' },
+      { label: 'Before 6 am', value: 'departure: Before 6 am' },
+      { label: '6am to 12pm', value: 'departure: 6am to 12pm' },
+      { label: '12pm to 6pm', value: 'departure: 12pm to 6pm' },
+      { label: 'After 6 pm', value: 'departure: After 6 pm' },
     ],
     busTypes: [
       { label: 'Seater', value: 'Seater' },
@@ -238,22 +250,26 @@ const BusTickets = (_props: Props) => {
     boardingPoint: [],
     droppingPoint: [],
     arrivalTime: [
-      { label: 'Before 6 am', value: 'Before 6 am' },
-      { label: '6am to 12pm', value: '6am to 12pm' },
-      { label: '12pm to 6pm', value: '12pm to 6pm' },
-      { label: 'After 6 pm', value: 'After 6 pm' },
+      { label: 'Before 6 am', value: 'arrival: Before 6 am' },
+      { label: '6am to 12pm', value: 'arrival: 6am to 12pm' },
+      { label: '12pm to 6pm', value: 'arrival: 12pm to 6pm' },
+      { label: 'After 6 pm', value: 'arrival: After 6 pm' },
     ]
   }
 
   function filterBuses(args: any) {
     console.log(args, 'args');
-    setBuses([...masterBusList]);
+    let chosenFilters: any[] = [];
+    chosenFilters = Object.values(args).flat().filter((item) => item);
+    console.log(chosenFilters, Object.values(args));
+    const filteredItems = masterBusList.filter((item) => chosenFilters.every(filter => item.tags.includes(filter)));
+    console.log(filteredItems, filteredItems.length);
+    setBuses(masterBusList.filter((item) => chosenFilters.every(filter => item.tags.includes(filter))))
   }
-
 
   return (
     <>
-      <div>Bus tickets</div>
+      <Header></Header>
       <div className="flex">
         <div>
           <TravelChoiceHeader />
