@@ -18,7 +18,12 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
+        path: '',
+        element: <Navigate to="home" replace />
+      },
+      {
         path: 'home',
+        index: true,
         element: <Home />
       },
       {
@@ -42,10 +47,6 @@ const router = createBrowserRouter([
           <Suspense fallback={<div className='flex my-6 justify-center py-2'><Spin />Loading...</div>}>
             <Trains />
           </Suspense>,
-      },
-      {
-        path: '',
-        element: <Navigate to="home" replace />
       }
     ]
   },
