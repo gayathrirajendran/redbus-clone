@@ -17,9 +17,9 @@ const Home = () => {
   }
 
   function loadOptions() {
-    const url = './placeOptions.json';
+    const url = 'placeOptions.json';
     setPlaceOptionsLoading(true);
-    axios(url).then((response) => { setPlaceOptions(response.data); setPlaceOptionsError(null) }).catch((err) => { setPlaceOptionsError(err); setPlaceOptions([]) }).finally(() => setPlaceOptionsLoading(false));
+    axios.get(url).then((response) => { setPlaceOptions(response.data); setPlaceOptionsError(null) }).catch((err) => { setPlaceOptionsError(err); setPlaceOptions([]) }).finally(() => setPlaceOptionsLoading(false));
   }
 
   useEffect(() => {

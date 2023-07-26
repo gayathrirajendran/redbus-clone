@@ -35,13 +35,13 @@ const BusTickets = () => {
   function loadBusList(locationState: { state: any }) {
     setComponentStatus('loading');
     const url = locationState.state?.fromField == 'Bengaluru' && locationState.state?.toField == 'Chennai' ? 'busList.json' : 'buses.json';
-    axios(url).then((response) => { setBuses(response.data); setComponentStatus('loaded') }).catch(() => { setComponentStatus('error'); setBuses([]) });
+    axios.get(url).then((response) => { setBuses(response.data); setComponentStatus('loaded') }).catch(() => { setComponentStatus('error'); setBuses([]) });
   }
 
   function loadFilters() {
     const url = 'filters.json';
     setFilterStats('loading');
-    axios(url).then((response) => { setFilters(response.data); setFilterStats('loaded'); }).catch(() => setFilterStats('error'));
+    axios.get(url).then((response) => { setFilters(response.data); setFilterStats('loaded'); }).catch(() => setFilterStats('error'));
   }
 
   function filterBuses(args: any) {
