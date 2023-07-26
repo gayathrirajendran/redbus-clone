@@ -1,4 +1,4 @@
-import { Button, Card, Col, Row } from "antd";
+import { Button, Card } from "antd";
 import { BusModel, SeatModel } from "../types/bus";
 import { useEffect, useState } from "react";
 import SeatSection from "./SeatSection";
@@ -73,43 +73,29 @@ const seatList: SeatModel[] = [
 const Bus = ({ busData }: Props) => {
 
     const [isSeatVisible, setIsSeatVisible] = useState<boolean>(false);
-    const tempSeats = !!localStorage.getItem(JSON.stringify(busData.id)) ? JSON.parse(localStorage.getItem(JSON.stringify(busData.id))!) : [];
+    const tempSeats = localStorage.getItem(JSON.stringify(busData.id)) ? JSON.parse(localStorage.getItem(JSON.stringify(busData.id))!) : [];
     const [seats, setSeats] = useState(tempSeats.length ? tempSeats : seatList);
-    const [selectedSeats, setSelectedSeats] = useState<SeatModel[]>([]);
-
-    // useEffect(() => {
-    //     let storedSelectedSeats;
-    //     // to do: get seat details
-    //     return () => {
-    //     }
-    // }, [isSeatVisible]);
 
     useEffect(() => {
+        // make an api request to book.
         localStorage.setItem(JSON.stringify(busData.id), JSON.stringify(seats));
     }, [seats])
 
-    function confirmBooking() {
+    function confirmBooking(selectedSeats: SeatModel[]) {
         setSeats(seats.map((seat: SeatModel) => {
-            let target = selectedSeats.find((item) => item.seatNo === seat.seatNo);
-            return target ? target : seat
+            const target = selectedSeats.find((item) => item.seatNo === seat.seatNo);
+            if(target) {
+                const { isMarked, ...response } = target;
+                return { ...response, isAvailable: !response.isAvailable };
+            } else {
+                return seat;
+            }
         }));
-        // make booking
-        // confirmBooking(seatData, busData);
     }
-
-    const selectSeat = (seatData: SeatModel, isAvailable: boolean) => {
-        // selectSeatInBus(seatData, busData);
-        const newSeat = { ...seatData, isAvailable: !isAvailable };
-        // confirm booking for the user in local storage so that the next user will not be able to. 
-
-        setSelectedSeats([...selectedSeats, newSeat])
-        // seats.map((seat) => seat.seatNo === newSeat.seatNo ? newSeat : seat)
-    }
-
 
     return (
         <div className="mx-2 px-2 my-2">
-            <Card hoverable bordered={true}>
+            <Card className="rounded-none" hoverable bordered={true}>
                 <div className="flex justify-between">
                     <div>
                         <div>
@@ -157,7 +143,7 @@ const Bus = ({ busData }: Props) => {
             </Card>
             {isSeatVisible &&
                 <div>
-                    <SeatSection seatType={busData.seatOffering} seats={seats} handleSeatSelection={selectSeat} confirmBooking={confirmBooking}></SeatSection>
+                    <SeatSection seatType={busData.seatOffering} seats={seats} confirmBooking={confirmBooking}></SeatSection>
                 </div>
             }
         </div>

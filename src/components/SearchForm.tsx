@@ -1,139 +1,85 @@
-import { DatePicker, DatePickerProps, Form, Select } from 'antd';
+import { DatePicker, Select } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
 
 type Props = {
   handleSubmission: any;
+  fromOptions: any;
+  toOptions: any;
 }
 
-interface IFormInput {
-  fromField: any;
-  toField: any;
-  dateField: any;
-}
 
-const SearchForm = ({ handleSubmission }: Props) => {
+const SearchForm = ({ handleSubmission, fromOptions, toOptions }: Props) => {
   const { control, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = function (val: any) {
-    console.log(val, 'submission', val.dateField.$d);
+    // console.log(val, 'submission', val.dateField.$d);
     handleSubmission(val);
   }
 
-  const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-    console.log(date, dateString);
-  };
-
   return (
-      <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-              <label htmlFor='fromField'>From</label>
-              <Controller
-                  name="fromField"
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field }) => <Select id="fromField"
-                  { ...field }
-                  showSearch
-                  style={{ width: 200 }}
-                  placeholder="Search to Select"
-                  optionFilterProp="children"
-                  filterOption={(input, option) => (option?.label ?? '').includes(input)}
-                  filterSort={(optionA, optionB) =>
-                    (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
-                  }
-                  options={[
-                    {
-                      value: '1',
-                      label: 'Not Identified',
-                    },
-                    {
-                      value: '2',
-                      label: 'Closed',
-                    },
-                    {
-                      value: '3',
-                      label: 'Communicated',
-                    },
-                    {
-                      value: '4',
-                      label: 'Identified',
-                    },
-                    {
-                      value: '5',
-                      label: 'Resolved',
-                    },
-                    {
-                      value: '6',
-                      label: 'Cancelled',
-                    },
-                  ]}
-                />}></Controller>
+    <form className='flex justify-center py-2' onSubmit={handleSubmit(onSubmit)}>
+      <div className='flex justify-center gap-2 py-2 px-4 my-2 align-items-center bordered-1 rounded bg-white'>
+        <div>
+          <label className='block' htmlFor='fromField'>From</label>
+          <Controller
+            name="fromField"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => <Select className='block' id="fromField"
+              {...field}
+              showSearch
+              style={{ width: 200 }}
+              placeholder="Search to Select"
+              optionFilterProp="children"
+              filterOption={(input, option) => (option?.label ?? '').includes(input)}
+              filterSort={(optionA, optionB) =>
+                (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+              }
+              options={fromOptions}
+            />}></Controller>
 
-              {errors.fromField?.message && errors.fromField?.type === 'required' && <div>{errors.fromField.message.toString()}</div>}
-          </div>
+          {errors.fromField?.message && errors.fromField?.type === 'required' && <div>{errors.fromField.message.toString()}</div>}
+        </div>
 
-          <div>
-              <label htmlFor='toField'>To</label>
-              <Controller
-                  name="toField"
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field }) => <Select id="toField"
-                  { ...field }
-                  showSearch
-                  style={{ width: 200 }}
-                  placeholder="Search to Select"
-                  optionFilterProp="children"
-                  filterOption={(input, option) => (option?.label ?? '').includes(input)}
-                  filterSort={(optionA, optionB) =>
-                    (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
-                  }
-                  options={[
-                    {
-                      value: '1',
-                      label: 'Not Identified',
-                    },
-                    {
-                      value: '2',
-                      label: 'Closed',
-                    },
-                    {
-                      value: '3',
-                      label: 'Communicated',
-                    },
-                    {
-                      value: '4',
-                      label: 'Identified',
-                    },
-                    {
-                      value: '5',
-                      label: 'Resolved',
-                    },
-                    {
-                      value: '6',
-                      label: 'Cancelled',
-                    },
-                  ]}
-                />}></Controller>
+        <div>
+          <label htmlFor='toField'>To</label>
+          <Controller
+            name="toField"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => <Select className='block' id="toField"
+              {...field}
+              showSearch
+              style={{ width: 200 }}
+              placeholder="Search to Select"
+              optionFilterProp="children"
+              filterOption={(input, option) => (option?.label ?? '').includes(input)}
+              filterSort={(optionA, optionB) =>
+                (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+              }
+              options={toOptions}
+            />}></Controller>
 
 
-              {/* <textarea id="to" {...register("toField", { required: true })}></textarea> */}
-              {errors.toField && <div>This field is required</div>}
-          </div>
+          {/* <textarea id="to" {...register("toField", { required: true })}></textarea> */}
+          {errors.toField && <div>This field is required</div>}
+        </div>
 
-          <div>
-              <label htmlFor='dateField'>Date</label>
-              <Controller
-                  name="dateField"
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field }) => <DatePicker id="dateField" {...field} />}
-              />
+        <div>
+          <label htmlFor='dateField'>Date</label>
+          <Controller
+            name="dateField"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => <DatePicker className='block' id="dateField" {...field} />}
+          />
 
-              {errors.dateField && <div>This field is required</div>}
-          </div>
+          {errors.dateField && <div>This field is required</div>}
+        </div>
 
-          <button type="submit">Submit</button>
-      </form>
+        <div className='my-1 py-2'>
+          <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-2' type="submit">Submit</button></div>
+      </div>
+    </form>
 
   )
 

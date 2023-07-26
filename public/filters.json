@@ -1,0 +1,92 @@
+{
+    "generic": [
+        {
+            "label": "Live Tracking",
+            "value": "Live Tracking"
+        },
+        {
+            "label": "Primo Bus",
+            "value": "Primo Bus"
+        }
+    ],
+    "departureTime": [
+        {
+            "label": "Before 6 am",
+            "value": "departure: Before 6 am"
+        },
+        {
+            "label": "6am to 12pm",
+            "value": "departure: 6am to 12pm"
+        },
+        {
+            "label": "12pm to 6pm",
+            "value": "departure: 12pm to 6pm"
+        },
+        {
+            "label": "After 6 pm",
+            "value": "departure: After 6 pm"
+        }
+    ],
+    "busTypes": [
+        {
+            "label": "Seater",
+            "value": "Seater"
+        },
+        {
+            "label": "Sleeper",
+            "value": "Sleeper"
+        },
+        {
+            "label": "AC",
+            "value": "AC"
+        },
+        {
+            "label": "NON AC",
+            "value": "NON AC"
+        }
+    ],
+    "seatAvailability": [
+        {
+            "label": "Single seats",
+            "value": "Single seats"
+        }
+    ],
+    "amenities": [
+        {
+            "label": "Wifi",
+            "value": "Wifi"
+        },
+        {
+            "label": "Movie",
+            "value": "Movie"
+        },
+        {
+            "label": "Blankets",
+            "value": "Blankets"
+        },
+        {
+            "label": "Food",
+            "value": "Food"
+        }
+    ],
+    "boardingPoint": [],
+    "droppingPoint": [],
+    "arrivalTime": [
+        {
+            "label": "Before 6 am",
+            "value": "arrival: Before 6 am"
+        },
+        {
+            "label": "6am to 12pm",
+            "value": "arrival: 6am to 12pm"
+        },
+        {
+            "label": "12pm to 6pm",
+            "value": "arrival: 12pm to 6pm"
+        },
+        {
+            "label": "After 6 pm",
+            "value": "arrival: After 6 pm"
+        }
+    ]
+}

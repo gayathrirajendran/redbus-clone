@@ -45,6 +45,11 @@
 body {
   margin: 0;
   padding: 0;
+  min-height: 100%;
+}
+
+html, body {
+  overflow: auto;
 }
 
 .rb-content {
@@ -75,6 +80,11 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+.home-body {
+  background-color: #ccc;
+  padding-bottom: 40px;
 }
 
 /* .carousel-container {
@@ -115,11 +125,20 @@ body {
   cursor: pointer;
 }
 .nav .prev {
-  left: 10px;
-  top: -100px;
+  left: -30px;
+  top: -150px;
 }
 
 .nav .next {
-  right: 10px;
-  top: -100px;
+  right: -30px;
+  top: -150px;
+}
+
+.active {
+  font-weight: bolder;
+}
+
+.marked, .marked:hover, .marked:active {
+  border-color: orange !important;
+  color: orange !important;
 }

@@ -1,6 +1,5 @@
 import { Button } from "antd";
-import { useRef, useState, useEffect, Children, cloneElement } from "react";
-
+import { useRef, useState, useEffect, Children } from "react";
 
 // const carouselItems = Array.from({ length: 10 }, (_, index) => index + 1).map((item) =>
 //     <div key={item} className="carousel-item text-center relative w-64 h-64 snap-start">
@@ -10,10 +9,6 @@ import { useRef, useState, useEffect, Children, cloneElement } from "react";
 
 const CarouselItem = ({ children }: any) => {
     return <div className="carousel-item text-center relative w-64 h-64 snap-start">{children}</div>
-}
-
-type CarouselProps = {
-    children: Array<typeof CarouselItem>;
 }
 
 
@@ -68,30 +63,13 @@ const Carousel = ({ children }: any) => {
 
     return (
         <>
-
-            {/* <ul
-                style={{
-                    listStyle: "none",
-                    display: "flex",
-                }}
-            >
-                {Children.map(arrayChildren, (child, index) => {
-                    return (
-                        <>
-                            <div>
-                                {child}
-                            </div>
-                        </>
-                    );
-                })}
-            </ul> */}
             <div className="carousel my-12 mx-auto">
                 <div className="relative overflow-hidden">
-                    <div ref={carousel} className="carousel-container relative flex gap-1 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0">
+                    <div ref={carousel} className="carousel-container relative flex gap-4 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0">
                         {Children.map(arrayChildren, (child) => {
                             return (
                                 <>
-                                    <div>
+                                    <div className="bg-white bordered rounded">
                                         {child}
                                     </div>
                                 </>
@@ -100,8 +78,8 @@ const Carousel = ({ children }: any) => {
                     </div>
                 </div>
                 <div className="nav relative">
-                    <Button className="prev" disabled={isDisabled("prev")} onClick={movePrev}>Left</Button>
-                    <Button className="next" disabled={isDisabled("next")} onClick={moveNext}>Right</Button>
+                    <Button className="prev" disabled={isDisabled("prev")} onClick={movePrev}>&lt;&lt;</Button>
+                    <Button className="next" disabled={isDisabled("next")} onClick={moveNext}>&gt;&gt;</Button>
                 </div>
             </div>
         </>

@@ -19,6 +19,7 @@ export interface BusModel {
 
 export interface SeatModel {
     isAvailable: boolean; 
+    isMarked?: boolean;
     price: string; 
     seatNo: string;
 }

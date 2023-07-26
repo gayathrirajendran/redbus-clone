@@ -1,4 +1,4 @@
-import { FieldValues, useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { FilterModel, FilterOptionModel } from "../types/filters";
 // import { Checkbox, Select } from "antd";
 import { Fragment, useEffect } from "react";
@@ -6,6 +6,17 @@ import { Fragment, useEffect } from "react";
 type Props = {
   filterTypes: FilterModel;
   filterChange: any;
+}
+
+const filterNameMap: any = {
+  'generic': 'Filters',
+  'departureTime': 'Departure Time',
+  'busTypes': 'Bus types',
+  'seatAvailability': 'Seat availability',
+  'amenities': 'Amenities',
+  'boardingPoint': 'Boarding point',
+  'droppingPoint': 'Dropping point',
+  'arrivalTime': 'Arrival Time'
 }
 
 const Filters = ({ filterTypes, filterChange }: Props) => {
@@ -16,9 +27,8 @@ const Filters = ({ filterTypes, filterChange }: Props) => {
   const formVal = watch();
 
   useEffect(() => {
-    const subscription = watch((value, { name, type }) => {
+    const subscription = watch((value) => {
       filterChange(value);
-      console.log(value, name, type)
     });
     return () => subscription.unsubscribe();
   }, [formVal])
@@ -45,7 +55,8 @@ const Filters = ({ filterTypes, filterChange }: Props) => {
       <div>
         {filters.map((filter: keyof FilterModel) =>
           <Fragment key={filter}>
-            <div><strong className="my-0.5">{filter?.toUpperCase()}</strong></div>
+            <br></br>
+            <div><strong className="my-0.5">{filterNameMap[filter]?.toUpperCase()}</strong></div>
             {filterMarkup(filter)}
           </Fragment>
         )}

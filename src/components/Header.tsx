@@ -1,25 +1,27 @@
 import { useState } from "react"
 import { logoImgSrc } from "../constants/application";
 import { NavLink } from "react-router-dom";
-import { Button, Dropdown, MenuProps, Modal, Space, Typography } from "antd";
+import { Button, Dropdown, MenuProps, Modal, Space } from "antd";
 import { DownOutlined } from '@ant-design/icons';
 
-type Props = {}
 
 const navigation = [
   { name: 'Bus tickets', link: '/bus-tickets' },
-  { name: 'Cab rental', link: '/' },
-  { name: 'Train tickets', link: '/' }
+  { name: 'Cab rental', link: '/cab-rental' },
+  { name: 'Train tickets', link: '/train-tickets' }
 ]
-
-
 
 const logoStyles = {
   height: '3rem',
   cursor: 'pointer'
 }
 
-const Header = (_props: Props) => {
+const headerStyles = {
+  backgroundColor: '#d84f57',
+  color: 'white'
+}
+
+const Header = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -29,7 +31,6 @@ const Header = (_props: Props) => {
 
 
   const handleMenuClick: MenuProps['onClick'] = (e) => {
-    console.log('click', e);
     if (e.key === '1') {
       // open modal
       setIsModalOpen(true);
@@ -49,30 +50,32 @@ const Header = (_props: Props) => {
   };
 
   return (
-    <header className="sticky top-0 flex items-center justify-between rb-content mx-auto">
-      <div className="flex items-center">
-        <img src={logoImgSrc} alt="redBus" style={logoStyles} />
-        <nav className="main-nav">{links}</nav>
-      </div>
+    <header className="sticky py-2 z-10 top-0 w-full box-border" style={headerStyles}>
+      <div className="rb-content flex items-center justify-between mx-auto">
+        <div className="flex items-center gap-2">
+          <img src={logoImgSrc} alt="redBus" style={logoStyles} />
+          <nav className="main-nav flex gap-2">{links}</nav>
+        </div>
 
-      <div className="flex items-center">
-        <button type="button" title="Help">Help</button>
+        <div className="flex gap-2 items-center">
+          <button type="button" title="Help">Help</button>
 
-        <Dropdown menu={menuProps}>
-          <Button>
-            <Space>
-              Button
-              <DownOutlined />
-            </Space>
-          </Button>
-        </Dropdown>
+          <Dropdown menu={menuProps}>
+            <Button>
+              <Space>
+                Button
+                <DownOutlined />
+              </Space>
+            </Button>
+          </Dropdown>
 
-        <Modal title="Basic Modal" open={isModalOpen} closable={true} onCancel={() => setIsModalOpen(false)}>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
+          <Modal title="Basic Modal" open={isModalOpen} closable={true} onCancel={() => setIsModalOpen(false)}>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+          </Modal>
 
+        </div>
       </div>
     </header >
 
