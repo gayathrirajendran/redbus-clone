@@ -58,7 +58,7 @@ const SeatSection = ({ seatType, seats, confirmBooking }: Props) => {
             </ul>
 
             <div className="my-2 flex justify-center align-items-center py-2">
-                <Button onClick={() => { confirmBooking(selectedSeats.filter((item) => item.isMarked)); setSelectedSeats([]); }} disabled={selectedSeats.filter((item) => item.isMarked).length === 0}>Confirm Booking</Button>
+                <Button type="primary" onClick={() => { confirmBooking(selectedSeats.filter((item) => item.isMarked)); setSelectedSeats([]); }} disabled={selectedSeats.filter((item) => item.isMarked).length === 0}>Confirm Booking</Button>
             </div>
         </div>
     )
