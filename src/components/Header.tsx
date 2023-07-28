@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { logoImgSrc } from "../constants/application";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Button, Dropdown, MenuProps, Modal, Space } from "antd";
 import { DownOutlined } from '@ant-design/icons';
 
@@ -53,7 +53,9 @@ const Header = () => {
     <header className="sticky py-2 z-10 top-0 w-full box-border" style={headerStyles}>
       <div className="rb-content flex items-center justify-between mx-auto">
         <div className="flex items-center gap-2">
-          <img src={logoImgSrc} alt="redBus" style={logoStyles} />
+          <Link to="/">
+            <img src={logoImgSrc} alt="redBus" style={logoStyles} />
+          </Link>
           <nav className="main-nav flex gap-2">{links}</nav>
         </div>
 
