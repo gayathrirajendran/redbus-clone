@@ -11,6 +11,7 @@ import { Spin } from "antd";
 const BusTickets = () => {
 
   const [buses, setBuses] = useState<BusModel[]>([]);
+  const [masterBusList, setMasterBusList] = useState<BusModel[]>([]);
   const [componentStatus, setComponentStatus] = useState<'' | 'loading' | 'loaded' | 'error'>('');
 
   const [filters, setFilters] = useState<any>(undefined);
@@ -35,7 +36,7 @@ const BusTickets = () => {
   function loadBusList(locationState: { state: any }) {
     setComponentStatus('loading');
     const url = locationState.state?.fromField == 'Bengaluru' && locationState.state?.toField == 'Chennai' ? 'busList.json' : 'buses.json';
-    axios.get(url).then((response) => { setBuses(response.data); setComponentStatus('loaded') }).catch(() => { setComponentStatus('error'); setBuses([]) });
+    axios.get(url).then((response) => { setBuses(response.data); setMasterBusList(response.data); setComponentStatus('loaded') }).catch(() => { setComponentStatus('error'); setBuses([]); setMasterBusList([]) });
   }
 
   function loadFilters() {
@@ -48,7 +49,12 @@ const BusTickets = () => {
     // console.log(args, 'args');
     let chosenFilters: any[] = [];
     chosenFilters = Object.values(args).flat().filter((item) => item);
-    setBuses(buses.filter((item) => chosenFilters.every(filter => item.tags.includes(filter))))
+    console.log(chosenFilters);
+    if (chosenFilters.length) {
+      setBuses(masterBusList.filter((item) => chosenFilters.every(filter => item.tags.includes(filter))))
+    } else {
+      setBuses(masterBusList.map((item) => item));
+    }
   }
 
   return (
