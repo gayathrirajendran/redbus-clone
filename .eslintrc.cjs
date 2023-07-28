@@ -32,6 +32,7 @@ module.exports = {
     "@typescript-eslint/no-unsafe-return": 'off',
     "@typescript-eslint/no-unused-vars": 'off',
     "@typescript-eslint/no-misused-promises": 'off',
-    "react-hooks/exhaustive-deps": 'off'
+    "react-hooks/exhaustive-deps": 'off',
+    "@typescript-eslint/restrict-template-expressions": 'off'
   },
 }

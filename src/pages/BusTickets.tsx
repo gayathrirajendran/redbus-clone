@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import TravelChoiceHeader from "../components/TravelChoiceHeader";
 import Filters from "../components/Filters";
 import Offers from "../components/Offers";
@@ -34,7 +34,7 @@ const BusTickets = () => {
 
   function loadBusList(params: any) {
     setComponentStatus('loading');
-    const url = params?.fromField == 'Bengaluru' && params?.toField == 'Chennai' ? '/busList.json' : '/buses.json';
+    const url: string = params?.fromField == 'Bengaluru' && params?.toField == 'Chennai' ? '/busList.json' : '/buses.json';
     axios.get(url).then((response) => { setBuses(response.data); setMasterBusList(response.data); setComponentStatus('loaded') }).catch(() => { setComponentStatus('error'); setBuses([]); setMasterBusList([]) });
   }
 

@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://gayathrirajendran.github.io/redbus-clone",
+  "homepage": "/redbus-clone",
   "scripts": {
     "dev": "vite",
     "build": "yarn lint && tsc && vite build",
