@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         element: <Home />
       },
       {
-        path: "bus-tickets",
+        path: "bus-tickets/:fromField/:toField/:dateField",
         element:
           <Suspense fallback={<div className='flex my-6 justify-center py-2'><Spin />Loading...</div>}>
             <Tickets />
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
   },
   {
     path: '*',
-    element: <Navigate to="/" replace />
+    element: <Navigate to="/home" replace />
   }
 ]);
 

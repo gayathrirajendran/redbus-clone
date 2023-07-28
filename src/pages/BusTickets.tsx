@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import TravelChoiceHeader from "../components/TravelChoiceHeader";
 import Filters from "../components/Filters";
 import Offers from "../components/Offers";
@@ -16,31 +16,30 @@ const BusTickets = () => {
 
   const [filters, setFilters] = useState<any>(undefined);
   const [filterStats, setFilterStats] = useState<'' | 'loading' | 'loaded' | 'error'>('');
-  const locationState: { state: any } = useLocation();
+  const params: any = useParams();
+  console.log(params, 'params');
   const navigate = useNavigate();
 
   // console.log(locationState, 'locationState');
 
   useEffect(() => {
-    if (!locationState.state) navigateToView();
-    if (locationState) {
-      loadBusList(locationState);
-      loadFilters();
-    }
+    if (!params) navigateToHome();
+    loadBusList(params);
+    loadFilters();
   }, []);
 
-  function navigateToView() {
+  function navigateToHome() {
     navigate('/home')
   }
 
-  function loadBusList(locationState: { state: any }) {
+  function loadBusList(params: any) {
     setComponentStatus('loading');
-    const url = locationState.state?.fromField == 'Bengaluru' && locationState.state?.toField == 'Chennai' ? 'busList.json' : 'buses.json';
+    const url = params?.fromField == 'Bengaluru' && params?.toField == 'Chennai' ? '/busList.json' : '/buses.json';
     axios.get(url).then((response) => { setBuses(response.data); setMasterBusList(response.data); setComponentStatus('loaded') }).catch(() => { setComponentStatus('error'); setBuses([]); setMasterBusList([]) });
   }
 
   function loadFilters() {
-    const url = 'filters.json';
+    const url = '/filters.json';
     setFilterStats('loading');
     axios.get(url).then((response) => { setFilters(response.data); setFilterStats('loaded'); }).catch(() => setFilterStats('error'));
   }
@@ -61,7 +60,7 @@ const BusTickets = () => {
     <div className="">
       <div className="bg-slate-200">
         <div className="rb-content mx-auto">
-          <TravelChoiceHeader from={locationState.state?.fromField} to={locationState.state?.toField} date={locationState.state?.dateField.$d} />
+          <TravelChoiceHeader from={params.fromField} to={params.toField} date={new Date(params.dateField)} />
         </div>
       </div>
 

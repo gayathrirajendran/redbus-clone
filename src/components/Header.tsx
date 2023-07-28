@@ -6,7 +6,7 @@ import { DownOutlined } from '@ant-design/icons';
 
 
 const navigation = [
-  { name: 'Bus tickets', link: '/bus-tickets' },
+  { name: 'Bus tickets', link: '/bus-tickets/:fromField/:toField/:dateField' },
   { name: 'Cab rental', link: '/cab-rental' },
   { name: 'Train tickets', link: '/train-tickets' }
 ]

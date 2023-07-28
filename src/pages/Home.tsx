@@ -13,11 +13,11 @@ const Home = () => {
 
   const navigate = useNavigate();
   function navigateToView(formState: any) {
-    navigate('/bus-tickets', { state: formState })
+    navigate(`/bus-tickets/${formState.fromField}/${formState.toField}/${formState.dateField}`)
   }
 
   function loadOptions() {
-    const url = 'placeOptions.json';
+    const url = '/placeOptions.json';
     setPlaceOptionsLoading(true);
     axios.get(url).then((response) => { setPlaceOptions(response.data); setPlaceOptionsError(null) }).catch((err) => { setPlaceOptionsError(err); setPlaceOptions([]) }).finally(() => setPlaceOptionsLoading(false));
   }
